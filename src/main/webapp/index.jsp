@@ -6,19 +6,20 @@
     <title>MyShop — Modern E‑Commerce</title>
 
     <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
 
     <style>
         :root {
-            --bg: #ffffff;
-            --primary: #0a2540;
-            --accent: #00d4ff;
-            --muted: #7a7a7a;
+            --bg: #fffaf5;
+            --primary: #1a1a2e;
+            --accent: #ff6b35;
+            --accent-2: #f7b32b;
+            --muted: #8b8598;
             --card: #ffffff;
-            --surface: #f6f9fc;
-            --success: #28a745;
-            --radius: 12px;
+            --surface: #f5f0ff;
+            --success: #06a77d;
+            --radius: 16px;
             --container: 1200px;
         }
 
@@ -38,7 +39,7 @@
             background: var(--bg);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
         a {
@@ -58,9 +59,9 @@
             position: sticky;
             top: 0;
             z-index: 40;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.95));
-            border-bottom: 1px solid rgba(10, 37, 64, 0.04);
-            backdrop-filter: blur(4px);
+            background: rgba(255, 250, 245, 0.88);
+            border-bottom: 1px solid rgba(26, 26, 46, 0.06);
+            backdrop-filter: blur(10px);
         }
 
         .header-inner {
@@ -76,13 +77,17 @@
             align-items: center;
             gap: 12px;
             font-family: Poppins, sans-serif;
-            font-weight: 700;
-            font-size: 20px;
+            font-weight: 800;
+            font-size: 21px;
             color: var(--primary);
+            letter-spacing: -0.01em;
         }
 
         .brand .accent {
-            color: var(--accent)
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         nav.main-nav {
@@ -104,10 +109,11 @@
             display: flex;
             gap: 8px;
             align-items: center;
-            padding: 8px 10px;
-            border-radius: 8px;
+            padding: 8px 12px;
+            border-radius: 999px;
             color: var(--primary);
             font-weight: 500;
+            transition: background .18s ease, color .18s ease;
         }
 
         nav.main-nav li a:hover {
@@ -120,9 +126,16 @@
             align-items: center;
             gap: 8px;
             background: var(--surface);
-            padding: 8px 12px;
+            padding: 9px 14px;
             border-radius: 999px;
             min-width: 240px;
+            border: 1px solid transparent;
+            transition: border-color .18s ease, box-shadow .18s ease;
+        }
+
+        .search:focus-within {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.14);
         }
 
         .search input {
@@ -135,18 +148,24 @@
 
         .icon-btn {
             background: transparent;
-            color: var(--primary);
             border: 0;
             cursor: pointer;
-            color: var(--primary);
             font-size: 16px;
             color: var(--primary);
+            padding: 6px;
+            border-radius: 50%;
+            transition: background .18s ease, color .18s ease;
+        }
+
+        .icon-btn:hover {
+            background: var(--surface);
+            color: var(--accent);
         }
 
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 6px;
         }
 
         .cart {
@@ -154,15 +173,20 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 6px 8px;
-            border-radius: 8px;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background .18s ease;
+        }
+
+        .cart:hover {
+            background: var(--surface);
         }
 
         .cart-count {
             position: absolute;
-            top: -6px;
-            right: -6px;
-            background: var(--accent);
+            top: -4px;
+            right: -4px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
             color: white;
             font-size: 11px;
             font-weight: 700;
@@ -171,6 +195,7 @@
             border-radius: 50%;
             display: inline-grid;
             place-items: center;
+            box-shadow: 0 2px 6px rgba(255, 107, 53, 0.4);
         }
 
         .mobile-toggle {
@@ -188,58 +213,77 @@
             justify-content: center;
             text-align: center;
             background:
-                linear-gradient(180deg, rgba(10, 37, 64, 0.6), rgba(10, 37, 64, 0.6)),
+                linear-gradient(160deg, rgba(26, 26, 46, 0.82), rgba(255, 107, 53, 0.45)),
                 url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
             color: white;
-            min-height: 420px;
-            padding: 56px 20px;
-            border-bottom-left-radius: var(--radius);
-            border-bottom-right-radius: var(--radius);
+            min-height: 460px;
+            padding: 64px 20px;
+            border-radius: 0 0 32px 32px;
         }
 
         .hero h1 {
             font-family: Poppins;
-            font-size: 40px;
-            margin: 0 0 12px;
+            font-weight: 800;
+            font-size: 44px;
+            margin: 0 0 14px;
             letter-spacing: -0.02em;
         }
 
         .hero p {
-            margin: 0 0 22px;
+            margin: 0 0 26px;
             opacity: 0.95;
             max-width: 820px;
+            font-size: 17px;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 10px 18px;
+            padding: 12px 22px;
             border-radius: 999px;
             font-weight: 600;
             cursor: pointer;
             border: 0;
+            transition: transform .16s ease, box-shadow .16s ease, opacity .16s ease;
         }
 
         .btn-primary {
-            background: var(--accent);
-            color: #042233;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: white;
+            box-shadow: 0 10px 24px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(255, 107, 53, 0.5);
         }
 
         .btn-ghost {
             background: transparent;
-            border: 2px solid rgba(255, 255, 255, 0.18);
+            border: 2px solid rgba(255, 255, 255, 0.35);
             color: white;
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-2px);
         }
 
         /* Sections */
         .section {
-            padding: 48px 0;
+            padding: 52px 0;
         }
 
         .section .title {
             text-align: center;
-            margin-bottom: 18px;
+            margin-bottom: 22px;
+        }
+
+        .section .title h2 {
+            font-family: Poppins;
+            font-size: 28px;
+            margin-bottom: 6px;
         }
 
         .grid {
@@ -254,27 +298,31 @@
 
         .cat-card {
             background: var(--card);
-            border-radius: 12px;
-            padding: 18px;
+            border-radius: var(--radius);
+            padding: 20px;
             text-align: center;
-            box-shadow: 0 8px 20px rgba(10, 37, 64, 0.04);
-            transition: transform .18s ease, box-shadow .18s ease;
+            box-shadow: 0 8px 20px rgba(26, 26, 46, 0.06);
+            transition: transform .2s ease, box-shadow .2s ease;
+            cursor: pointer;
+            border: 1px solid rgba(26, 26, 46, 0.04);
         }
 
         .cat-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 20px 40px rgba(10, 37, 64, 0.06);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.18);
+            border-color: rgba(255, 107, 53, 0.25);
         }
 
         .cat-card .icon {
-            font-size: 28px;
+            font-size: 26px;
             color: var(--accent);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .cat-card h4 {
             margin: 6px 0 0;
-            font-size: 15px;
+            font-size: 14px;
+            font-weight: 600;
         }
 
         /* Products */
@@ -284,11 +332,18 @@
 
         .product {
             background: var(--card);
-            border-radius: 12px;
+            border-radius: var(--radius);
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 8px 20px rgba(10, 37, 64, 0.04);
+            box-shadow: 0 8px 20px rgba(26, 26, 46, 0.06);
+            transition: transform .2s ease, box-shadow .2s ease;
+            border: 1px solid rgba(26, 26, 46, 0.04);
+        }
+
+        .product:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.16);
         }
 
         .product img {
@@ -299,7 +354,7 @@
         }
 
         .product-body {
-            padding: 12px 14px;
+            padding: 14px 16px;
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -309,6 +364,7 @@
         .product h5 {
             margin: 0;
             font-size: 15px;
+            font-weight: 600;
         }
 
         .price-row {
@@ -320,7 +376,7 @@
 
         .price {
             font-weight: 700;
-            color: var(--primary);
+            color: var(--accent);
         }
 
         .old-price {
@@ -331,12 +387,12 @@
         }
 
         .rating {
-            color: #ffc107;
+            color: var(--accent-2);
             font-size: 13px;
         }
 
         .product-footer {
-            padding: 12px;
+            padding: 14px 16px;
             display: flex;
             gap: 10px;
         }
@@ -346,28 +402,41 @@
             background: var(--primary);
             color: white;
             border: 0;
-            padding: 10px;
-            border-radius: 8px;
+            padding: 11px;
+            border-radius: 10px;
             cursor: pointer;
             font-weight: 600;
+            transition: background .18s ease, transform .16s ease;
+        }
+
+        .add-btn:hover {
+            background: var(--accent);
+            transform: translateY(-1px);
         }
 
         .wish-btn {
             background: transparent;
-            border: 1px solid rgba(10, 37, 64, 0.06);
-            padding: 8px;
-            border-radius: 8px;
+            border: 1px solid rgba(26, 26, 46, 0.1);
+            padding: 8px 10px;
+            border-radius: 10px;
             cursor: pointer;
+            transition: border-color .18s ease, color .18s ease;
+        }
+
+        .wish-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
         }
 
         /* Deal */
         .deal {
             display: flex;
             gap: 18px;
-            background: var(--surface);
-            border-radius: 12px;
+            background: linear-gradient(135deg, var(--surface), #fff0e0);
+            border-radius: var(--radius);
             overflow: hidden;
-            align-items: center;
+            align-items: stretch;
+            box-shadow: 0 8px 24px rgba(26, 26, 46, 0.08);
         }
 
         .deal img {
@@ -378,8 +447,13 @@
         }
 
         .deal .content {
-            padding: 28px;
+            padding: 30px;
             flex: 1;
+        }
+
+        .deal h3 {
+            font-family: Poppins;
+            font-size: 24px;
         }
 
         .timer {
@@ -392,13 +466,22 @@
             background: var(--primary);
             color: white;
             padding: 12px 16px;
-            border-radius: 8px;
+            border-radius: 10px;
             min-width: 76px;
             text-align: center;
         }
 
         .deal .price {
             font-size: 26px;
+            color: var(--primary);
+        }
+
+        .deal-discount {
+            background: linear-gradient(135deg, var(--accent), #ff8c5a);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-weight: 700;
         }
 
         /* Testimonials */
@@ -412,22 +495,28 @@
         .testimonial {
             min-width: 320px;
             background: white;
-            padding: 18px;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(10, 37, 64, 0.04);
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: 0 8px 20px rgba(26, 26, 46, 0.06);
+            border: 1px solid rgba(26, 26, 46, 0.04);
         }
 
         /* Newsletter */
         .newsletter {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), #3a2a5e);
             color: white;
-            border-radius: 12px;
-            padding: 32px;
+            border-radius: var(--radius);
+            padding: 36px;
             text-align: center;
         }
 
+        .newsletter h3 {
+            font-family: Poppins;
+            font-size: 24px;
+        }
+
         .newsletter input {
-            padding: 12px 14px;
+            padding: 12px 16px;
             border-radius: 999px;
             border: 0;
             width: 320px;
@@ -439,7 +528,7 @@
         footer {
             margin-top: 24px;
             padding: 36px 0;
-            border-top: 1px solid rgba(10, 37, 64, 0.04);
+            border-top: 1px solid rgba(26, 26, 46, 0.06);
             color: var(--muted);
             font-size: 14px;
         }
@@ -517,7 +606,7 @@
     <header>
         <div class="container header-inner" role="banner">
             <div style="display:flex;align-items:center;gap:18px;">
-                <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu"><em class="fas fa-bars"></em></button>
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
                 <a class="brand" href="#">
                     <span>Nexus<span class="accent">Shop</span></span>
                 </a>
@@ -525,27 +614,27 @@
 
             <nav class="main-nav" id="mainNav" aria-label="Primary navigation">
                 <ul>
-                    <li><a href="#"><em class="fas fa-home"></em> Home</a></li>
+                    <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
                     <li class="has-dropdown" aria-haspopup="true">
-                        <a href="#" id="catMenuBtn"><em class="fas fa-th-large"></em> Categories <em class="fas fa-chevron-down" style="font-size:12px;"></em></a>
+                        <a href="#" id="catMenuBtn"><i class="fas fa-th-large"></i> Categories <i class="fas fa-chevron-down" style="font-size:12px;"></i></a>
                     </li>
-                    <li><a href="#"><em class="fas fa-fire"></em> Trending</a></li>
-                    <li><a href="#deals"><em class="fas fa-tag"></em> Deals</a></li>
-                    <li><a href="#about"><em class="fas fa-info-circle"></em> About</a></li>
+                    <li><a href="#"><i class="fas fa-fire"></i> Trending</a></li>
+                    <li><a href="#deals"><i class="fas fa-tag"></i> Deals</a></li>
+                    <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
                 </ul>
             </nav>
 
             <div style="display:flex;align-items:center;gap:14px;">
                 <div class="search" role="search" aria-label="Product search">
-                    <emnput type="search" id="searchInput" placeholder="Search products, categories..." aria-label="Search products" />
-                    <button class="icon-btn" id="searchBtn" aria-label="Search"><em class="fas fa-search"></em></button>
+                    <input type="search" id="searchInput" placeholder="Search products, categories..." aria-label="Search products" />
+                    <button class="icon-btn" id="searchBtn" aria-label="Search"><i class="fas fa-search"></i></button>
                 </div>
 
                 <div class="header-actions" role="group" aria-label="Header actions">
-                    <a class="icon-btn" title="Account" href="#"><em class="far fa-user"></em></a>
-                    <a class="icon-btn" title="Wishlist" href="#"><em class="far fa-heart"></em></a>
+                    <a class="icon-btn" title="Account" href="#"><i class="far fa-user"></i></a>
+                    <a class="icon-btn" title="Wishlist" href="#"><i class="far fa-heart"></i></a>
                     <a class="cart" href="#" id="cartBtn" title="View cart" aria-label="Cart">
-                        <em class="fas fa-shopping-cart"></em>
+                        <i class="fas fa-shopping-cart"></i>
                         <span class="cart-count" id="cartCount">0</span>
                     </a>
                 </div>
@@ -553,7 +642,7 @@
         </div>
 
         <!-- Mobile menu (hidden on desktop) -->
-        <div id="mobileMenu" style="display:none; background:var(--bg); border-top:1px solid rgba(10,37,64,0.04);">
+        <div id="mobileMenu" style="display:none; background:var(--bg); border-top:1px solid rgba(26,26,46,0.04);">
             <div class="container" style="padding:12px 0;">
                 <nav aria-label="Mobile navigation">
                     <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;">
@@ -575,7 +664,7 @@
                 <h1>New Winter Collection — Premium Picks</h1>
                 <p>Discover the latest trends in fashion, technology and accessories — curated just for you. Enjoy limited-time deals and free shipping on selected items.</p>
                 <div>
-                    <button class="btn btn-primary" id="shopNow">Shop Now <em class="fas fa-arrow-right"></em></button>
+                    <button class="btn btn-primary" id="shopNow">Shop Now <i class="fas fa-arrow-right"></i></button>
                     <button class="btn btn-ghost" id="exploreDeals">Explore Deals</button>
                 </div>
             </div>
@@ -609,7 +698,7 @@
             </div>
 
             <div class="deal" style="align-items:stretch;">
-                <emmg src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1200&q=80" alt="Deal product">
+                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1200&q=80" alt="Deal product">
                 <div class="content">
                     <h3>MacBook Air M2</h3>
                     <p class="muted">Thin, light and powerful — now with M2 performance.</p>
@@ -635,7 +724,7 @@
 
                     <div style="display:flex;align-items:center;gap:12px;">
                         <div class="price">$999 <span class="old-price" style="font-size:16px">$1,199</span></div>
-                        <div class="deal-discount" style="background:#ff4757;color:white;padding:6px 10px;border-radius:8px;font-weight:700">-17%</div>
+                        <div class="deal-discount">-17%</div>
                     </div>
 
                     <p style="margin-top:10px;">Only <strong>12</strong> items left at this price!</p>
@@ -658,7 +747,7 @@
                     <div class="rating">★★★★★</div>
                     <p>"Fast shipping and excellent customer support. The product exceeded my expectations!"</p>
                     <div style="display:flex;align-items:center;gap:10px">
-                        <emmg src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=80&q=80" alt="avatar" style="width:40px;height:40px;border-radius:50%;object-fit:cover">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=80&q=80" alt="avatar" style="width:40px;height:40px;border-radius:50%;object-fit:cover">
                         <div>
                             <div style="font-weight:700">Ava Martin</div>
                             <div class="muted" style="font-size:13px">Verified buyer</div>
@@ -670,7 +759,7 @@
                     <div class="rating">★★★★☆</div>
                     <p>"Great selection and the checkout was smooth. Will shop again."</p>
                     <div style="display:flex;align-items:center;gap:10px">
-                        <emmg src="https://images.unsplash.com/photo-1546456073-6712f79251bb?auto=format&fit=crop&w=80&q=80" alt="avatar" style="width:40px;height:40px;border-radius:50%;object-fit:cover">
+                        <img src="https://images.unsplash.com/photo-1546456073-6712f79251bb?auto=format&fit=crop&w=80&q=80" alt="avatar" style="width:40px;height:40px;border-radius:50%;object-fit:cover">
                         <div>
                             <div style="font-weight:700">Michael Lee</div>
                             <div class="muted" style="font-size:13px">Frequent buyer</div>
@@ -686,7 +775,7 @@
                 <h3 id="news-title">Stay in the loop</h3>
                 <p>Subscribe to get exclusive offers & new arrivals</p>
                 <form id="newsletterForm" style="display:flex;justify-content:center;gap:8px;flex-wrap:wrap;" onsubmit="return false;">
-                    <emnput id="newsletterEmail" type="email" placeholder="Enter your email" aria-label="Email address" required>
+                    <input id="newsletterEmail" type="email" placeholder="Enter your email" aria-label="Email address" required>
                     <button class="btn btn-primary" id="subscribeBtn">Subscribe</button>
                 </form>
                 <div id="newsletterMsg" style="margin-top:10px;font-size:14px;display:none"></div>
@@ -700,9 +789,9 @@
                 <div style="font-weight:700;font-size:18px">NexusShop</div>
                 <p class="muted" style="margin-top:8px">A modern e-commerce demo built with HTML, CSS & JavaScript.</p>
                 <div style="margin-top:14px;display:flex;gap:10px">
-                    <a class="icon-btn" href="#" title="Facebook"><em class="fab fa-facebook"></em></a>
-                    <a class="icon-btn" href="#" title="Twitter"><em class="fab fa-twitter"></em></a>
-                    <a class="icon-btn" href="#" title="Instagram"><em class="fab fa-instagram"></em></a>
+                    <a class="icon-btn" href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a class="icon-btn" href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a class="icon-btn" href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
 
@@ -722,7 +811,6 @@
     </footer>
 
     <script>
-    
         // --- Sample data (can be replaced by server-side data or API) ---
         const CATEGORIES = [{
                 id: 'phones',
@@ -849,7 +937,7 @@
                 const el = document.createElement('div');
                 el.className = 'cat-card';
                 el.innerHTML = `
-                    <div class="icon"><em class="fas ${cat.icon}"></em></div>
+                    <div class="icon"><i class="fas ${cat.icon}"></i></div>
                     <h4>${cat.name}</h4>
                     <div class="muted" style="font-size:13px;margin-top:6px">Explore ${cat.name}</div>
                 `;
@@ -871,8 +959,8 @@
                 const el = document.createElement('article');
                 el.className = 'product';
                 el.innerHTML = `
-                    ${p.badge ? `<div style="position:absolute;margin:12px"><span style="background:${p.badge.startsWith('-')? '#ff4757' : 'var(--success)'};color:white;padding:6px 8px;border-radius:8px;font-weight:700;font-size:12px">${p.badge}</span></div>` : ''}
-                    <emmg src="${p.img}" alt="${escapeHtml(p.title)}">
+                    ${p.badge ? `<div style="position:absolute;margin:12px"><span style="background:${p.badge.startsWith('-')? '#ff6b35' : 'var(--success)'};color:white;padding:6px 8px;border-radius:8px;font-weight:700;font-size:12px">${p.badge}</span></div>` : ''}
+                    <img src="${p.img}" alt="${escapeHtml(p.title)}">
                     <div class="product-body">
                         <h5>${escapeHtml(p.title)}</h5>
                         <div class="muted">${p.category}</div>
@@ -885,8 +973,8 @@
                         </div>
                     </div>
                     <div class="product-footer">
-                        <button class="add-btn" data-id="${p.id}"><em class="fas fa-cart-plus"></em> Add</button>
-                        <button class="wish-btn" aria-label="Add to wishlist"><em class="far fa-heart"></em></button>
+                        <button class="add-btn" data-id="${p.id}"><i class="fas fa-cart-plus"></i> Add</button>
+                        <button class="wish-btn" aria-label="Add to wishlist"><i class="far fa-heart"></i></button>
                     </div>
                 `;
                 productsGrid.appendChild(el);
@@ -979,7 +1067,7 @@
                 return;
             }
             msg.style.display = 'block';
-            msg.style.color = '#cce7ff';
+            msg.style.color = '#ffd8b3';
             msg.textContent = 'Thanks! You are subscribed.';
             document.getElementById('newsletterEmail').value = '';
             setTimeout(() => msg.style.display = 'none', 3000);
@@ -1028,4 +1116,4 @@
     </script>
 </body>
 
-</html> 
+</html>
